@@ -38,25 +38,7 @@ public class BaseballGame {
     }
 
     private BaseballCount createBaseballCount(BaseballNumber computerNumber, BaseballNumber userNumber) {
-        int strike = checkStrikeCount(computerNumber, userNumber);
-        int ball = checkBallCount(computerNumber, userNumber);
-        return new BaseballCount(strike, ball);
-    }
-
-    private int checkStrikeCount(BaseballNumber computerBaseballNumber, BaseballNumber userBaseballNumber) {
-        return baseballCountStrategy(new StrikeCountStrategy(computerBaseballNumber, userBaseballNumber));
-    }
-
-    private int checkBallCount(BaseballNumber computerBaseballNumber, BaseballNumber userBaseballNumber) {
-        return baseballCountStrategy(new BallCountStrategy(computerBaseballNumber, userBaseballNumber));
-    }
-
-    private int baseballCountStrategy(CountStrategy countStrategy) {
-        int count = 0;
-        for (int i = 0; i < 3; i++) {
-            count += countStrategy.counting(i);
-        }
-        return count;
+        return computerNumber.matchTo(userNumber);
     }
 
     private boolean wantToContinueGame() {

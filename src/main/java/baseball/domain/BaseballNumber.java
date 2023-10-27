@@ -1,6 +1,8 @@
 package baseball.domain;
 
+import baseball.dto.BaseballCount;
 import camp.nextstep.edu.missionutils.Randoms;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,23 @@ public class BaseballNumber {
         return baseballNumberList;
     }
 
-    public int get(int index) {
+    public BaseballCount matchTo(BaseballNumber baseballNumber) {
+        int strike = 0, ball = 0;
+        for (int i = 0; i < 3; i++) {
+            if (this.get(i) == baseballNumber.get(i)) {
+                strike++;
+            } else if (this.contains(baseballNumber.get(i))) {
+                ball++;
+            }
+        }
+        return new BaseballCount(strike, ball);
+    }
+
+    private int get(int index) {
         return baseballNumberList.get(index);
+    }
+
+    private boolean contains(int baseballNumber) {
+        return this.baseballNumberList.contains(baseballNumber);
     }
 }
